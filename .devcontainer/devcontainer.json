@@ -26,6 +26,7 @@
       "editor.tabSize": 2,
       "editor.formatOnSave": true
     },
+    "gitlens.codeLens.authors.command": false,
     "ruby.rubocop.executePath": "/usr/local/bundle/bin/",
     "ruby.rubocop.onSave": true,
     "ruby.rubocop.configFilePath": ".rubocop.yml",
