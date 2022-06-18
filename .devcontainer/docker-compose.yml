@@ -1,0 +1,41 @@
+version: '3'
+services:
+  app:
+    build: ./rails
+    tty: true
+    stdin_open: true
+    volumes:
+      - ../:/workspace
+      - bundle_path:/bundle
+    secrets:
+      - source: host_ssh_key
+        mode: 0600
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_HOST=db
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    depends_on:
+      - db
+      - redis
+
+  redis:
+    image: redis:6.2.5-alpine
+    volumes:
+      - "../.docker/redis/volums:/data"
+
+  db:
+    build: ./postgres
+    volumes:
+      - "../.docker/postgresql/volums:/var/lib/postgresql"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    tty: true
+volumes:
+  bundle_path:
+
+secrets:
+  host_ssh_key:
+    file: ~/.ssh/id_rsa

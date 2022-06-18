@@ -1,0 +1,40 @@
+{
+  "name": "vscode_rails_sample",
+  "dockerComposeFile": ["./docker-compose.yml"],
+  "service": "app" ,
+  "workspaceFolder": "/workspace",
+  "runServices": [
+    "db",
+    "redis"
+  ],
+  "extensions": [
+    "ms-ceintl.vscode-language-pack-ja",
+    "eamodio.gitlens",
+    "wingrunr21.vscode-ruby",
+    "mosapride.zenkaku",
+    "misogi.ruby-rubocop",
+    "emeraldwalk.runonsave",
+    "usernamehw.errorlens",
+    "natqe.reload",
+    "spywhere.guides",
+    "coenraads.bracket-pair-colorizer",
+    "github.copilot"
+  ],
+  "settings": {
+    "[ruby]": {
+      "editor.insertSpaces": true,
+      "editor.tabSize": 2,
+      "editor.formatOnSave": true
+    },
+    "ruby.rubocop.executePath": "/usr/local/bundle/bin/",
+    "ruby.rubocop.onSave": true,
+    "ruby.rubocop.configFilePath": ".rubocop.yml",
+    "editor.renderWhitespace": "all",
+    "editor.renderControlCharacters": true,
+    "files.trimTrailingWhitespace": true,
+    "files.trimFinalNewlines": true,
+    "files.insertFinalNewline": true,
+    "editor.tabSize": 2
+  },
+  "postCreateCommand": "bundle install --path=/bundle && yarn && bundle exec rake db:create && bundle exec rake db:migrate"
+}
